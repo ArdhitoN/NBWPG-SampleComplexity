@@ -15,21 +15,27 @@ An experiment code for a research on: Sample Complexity of Policy Gradient Reinf
    `cd core`
 
 3. In the directory, select an experiment to run:
-   `python -m experiment.<experiment_executable>`
+   
+      `python -m experiment.<experiment_executable>`
 
    * To find nearly Blackwell optimal policies:
-   `python -m experiment.exhaustive_search`
+   
+      `python -m experiment.exhaustive_search`
 
    * To run the NBWPGs, its visualizations, progressions, initial sample complexity measurements:
-   `python -m experiment.experiment_nbwpg`
+   
+      `python -m experiment.experiment_nbwpg`
 
    * To compute algorithm effectiveness w.r.t Blackwell:
-   `python -m experiment.compute_method_effectiveness`
+   
+      `python -m experiment compute_method_effectiveness`
 
    * To plot sample complexity visualizations:
-   `python -m experiment.plot_sample_complexity -c figs/experiment_outputs_final/<ENV>/<ENV>_convergence_data.csv`
+   
+      `python -m experiment.plot_sample_complexity -c figs/experiment_outputs_final/<ENV>/<ENV>_convergence_data.csv -o <OUTPUT_DIR>` 
 
 
    * Miscellany:
       * To plot bias progressions: 
-      `python -m experiment.plot_bias_progression`
+   
+         `python -m experiment.plot_bias_progression`
