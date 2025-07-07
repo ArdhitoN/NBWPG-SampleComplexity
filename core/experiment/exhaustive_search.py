@@ -7,13 +7,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-from core.agent.agent import Agent
-from core.environment.env import Env
+from agent.agent import Agent
+from environment.env import Env
 
 # Determine paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))      # code/experiment
 PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, '..'))  # code
-ENV_DIR = os.path.join(PROJECT_ROOT, 'env_config')           # code/environment
+ENV_DIR = os.path.join(PROJECT_ROOT, 'environment')           # code/environment
 AGENT_DIR = os.path.join(PROJECT_ROOT, 'agent')           # code/environment
 XHS_DIR = os.path.join(PROJECT_ROOT, 'xh_search_results')           # code/xh_search_results
 
@@ -79,20 +79,20 @@ def run_exhaustive_search(prefix='phase1'):
     df.to_csv(out_csv, index=False)
     print(f"Results saved to {out_csv}")
 
-    # Plot: Gain vs Bias for all policies
-    plt.figure()
-    plt.scatter(df['gain'], df['bias'], alpha=0.7)
-    plt.xlabel('Gain')
-    plt.ylabel('Bias at Initial State')
-    plt.title('Gain vs Bias for Deterministic Policies')
-    plt.grid(True)
-    scatter_fp = os.path.join(XHS_DIR, f'{prefix}_gain_bias_scatter.png')
-    plt.tight_layout()
-    plt.savefig(scatter_fp)
-    print(f"Scatter plot saved to {scatter_fp}")
+    # # Plot: Gain vs Bias for all policies
+    # plt.figure()
+    # plt.scatter(df['gain'], df['bias'], alpha=0.7)
+    # plt.xlabel('Gain')
+    # plt.ylabel('Bias at Initial State')
+    # plt.title('Gain vs Bias for Deterministic Policies')
+    # plt.grid(True)
+    # scatter_fp = os.path.join(XHS_DIR, f'{prefix}_gain_bias_scatter.png')
+    # plt.tight_layout()
+    # plt.savefig(scatter_fp)
+    # print(f"Scatter plot saved to {scatter_fp}")
 
     return df
 
 
 if __name__ == '__main__':
-    run_exhaustive_search(prefix='phase1')
+    run_exhaustive_search(prefix='test')

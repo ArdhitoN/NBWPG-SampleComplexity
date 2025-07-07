@@ -34,7 +34,7 @@ class Agent:
         self.rng = np.random.default_rng(seed)        
 
         self.gamma = gamma
-        self.lr = config.get("learning_rate", 0.1)
+        # self.lr = config.get("learning_rate", 0.1)
         
         self.env = env
         self.P = self.env.P
