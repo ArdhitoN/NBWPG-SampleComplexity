@@ -25,7 +25,7 @@ def compute_effectiveness(env_name='env-a1', output_dir=None):
     PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, '..')) # code
     FIGS_DIR = os.path.join(PROJECT_ROOT, 'figs')                   # code/figs
     AGENT_DIR = os.path.join(PROJECT_ROOT, 'agent')                # code/agent
-    EXH_DIR = os.path.join(PROJECT_ROOT, 'misc_results')                # code/agent
+    EXH_DIR = os.path.join(PROJECT_ROOT, 'xh_search_results')                # code/xh_search_results
 
     EXPERIMENT_OUTPUT_DIR = os.path.join(FIGS_DIR, 'experiment_outputs_final')
     ENV_OUTPUT_DIR = os.path.join(EXPERIMENT_OUTPUT_DIR, env_name)  # adjust per env name

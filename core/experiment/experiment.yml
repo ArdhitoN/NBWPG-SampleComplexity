@@ -1,5 +1,4 @@
-env_config: "env-red-blue.yml"
-# env_config: "env-a1.yml" 
+env_config: "env-a1.yml" 
 # env_config: "env-a2.yml" 
 # env_config: "env-a3.yml" 
 # env_config: "env-b1.yml" 

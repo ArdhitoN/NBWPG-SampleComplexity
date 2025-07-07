@@ -8,8 +8,8 @@ from tqdm import tqdm
 import optuna
 from visualizer import Visualizer
 
-from core.environment.env import Env
-from core.agent.agent import Agent
+from environment.env import Env
+from agent.agent import Agent
 
 # Configure logging
 logging.basicConfig(
