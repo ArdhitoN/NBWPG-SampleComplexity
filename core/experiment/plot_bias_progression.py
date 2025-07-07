@@ -3,8 +3,8 @@ import glob
 import numpy as np
 import pandas as pd
 
-from core.agent.agent import Agent
-from core.environment.env import Env
+from agent.agent import Agent
+from environment.env import Env
 
 # Paths setup
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))        # code/experiment
