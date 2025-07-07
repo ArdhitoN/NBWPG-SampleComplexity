@@ -1,3 +1,6 @@
+## Description
+An experiment code for a research on: Sample Complexity of Policy Gradient Reinforcement Learning For Environments With Transient States.
+
 ## How To Run:
 
 1. Create environment with conda:
