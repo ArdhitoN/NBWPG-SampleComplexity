@@ -1,0 +1,82 @@
+transitions:
+  s0:
+    a00: { "next_state": "s1", "reward": 5, "prob": 1.0 }
+    a01: { "next_state": "s2", "reward": 25, "prob": 1.0 }
+  s1:
+    a10: { "next_state": "s2", "reward": 50, "prob": 1.0 }
+    a11: { "next_state": "s2", "reward": 50, "prob": 1.0 }
+  s2:
+    a20: 
+      - { "next_state": "s2", "reward": 8, "prob": 0.5 }
+      - { "next_state": "s3", "reward": 8, "prob": 0.25 }
+      - { "next_state": "s4", "reward": 8, "prob": 0.25 }
+    a21: 
+      - { "next_state": "s2", "reward": 2.75, "prob": 0.0625 }
+      - { "next_state": "s3", "reward": 2.75, "prob": 0.75 }
+      - { "next_state": "s4", "reward": 2.75, "prob": 0.1875 }
+  s3:
+    a30: 
+      - { "next_state": "s2", "reward": 16, "prob": 0.5 }
+      - { "next_state": "s3", "reward": 16, "prob": 0.0 }
+      - { "next_state": "s4", "reward": 16, "prob": 0.5 }
+    a31:       
+      - { "next_state": "s2", "reward": 15, "prob": 0.0625 }
+      - { "next_state": "s3", "reward": 15, "prob": 0.875 }
+      - { "next_state": "s4", "reward": 15, "prob": 0.0625 }
+  s4:
+    a40:       
+      - { "next_state": "s2", "reward": 7, "prob": 0.25 }
+      - { "next_state": "s3", "reward": 7, "prob": 0.25 }
+      - { "next_state": "s4", "reward": 7, "prob": 0.50 }
+    a41:     
+      - { "next_state": "s2", "reward": 4, "prob": 0.125 }
+      - { "next_state": "s3", "reward": 4, "prob": 0.75 }
+      - { "next_state": "s4", "reward": 4, "prob": 0.125 }
+
+
+transitions_converted:
+  # Index at each level consecutively : current state, action, next state
+  0:
+    0:
+      1: { "prob": 1.0, "reward": 5 }
+
+    1:
+      2: { "prob": 1.0, "reward": 25 }
+
+  1:
+    0:
+      2: { "prob": 1.0, "reward": 50 }
+
+    1:
+      2: { "prob": 1.0, "reward": 50 }
+
+  2:
+    0:
+      2: { "prob": 0.5,   "reward": 8 }
+      3: { "prob": 0.25,  "reward": 8 }
+      4: { "prob": 0.25,  "reward": 8 }
+    1:
+      2: { "prob": 0.0625,"reward": 2.75 }
+      3: { "prob": 0.75,  "reward": 2.75 }
+      4: { "prob": 0.1875,"reward": 2.75 }
+  3:
+    0:
+      2: { "prob": 0.5,   "reward": 16 }
+      3: { "prob": 0.0,   "reward": 16 }
+      4: { "prob": 0.5,   "reward": 16 }
+    1:
+      2: { "prob": 0.0625,"reward": 15 }
+      3: { "prob": 0.875, "reward": 15 }
+      4: { "prob": 0.0625,"reward": 15 }
+  4:
+    0:
+      2: { "prob": 0.25,  "reward": 7 }
+      3: { "prob": 0.25,  "reward": 7 }
+      4: { "prob": 0.5,   "reward": 7 }
+    1:
+      2: { "prob": 0.125, "reward": 4 }
+      3: { "prob": 0.75,  "reward": 4 }
+      4: { "prob": 0.125, "reward": 4 }
+
+initial_state: "s0"
+initial_state_dist: { 0: 1.0 }

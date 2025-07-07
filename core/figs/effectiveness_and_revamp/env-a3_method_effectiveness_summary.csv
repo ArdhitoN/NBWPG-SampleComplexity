@@ -1,0 +1,7 @@
+method,gain_final,optimal_gain,gain_diff,effective_gain,gain_effectiveness,bias_final,optimal_bias,bias_effectiveness,effective_bias,label
+bias_progression_discounted_vanilla_popular_gamma_0.9857514384317185,0.0,0.0,0.0,True,1.0,-2.37217256686031,-2.2222222222222223,0.9325223449128605,True,D_V_Pop_$\gamma$=0.99
+bias_progression_discounted_vanilla_proper_gamma_0.9057502776046518,0.0,0.0,0.0,True,1.0,-3.111634789500265,-2.2222222222222223,0.5997643447248807,True,D_V_Prop_$\gamma$=0.91
+bias_progression_discounted_natural_popular_gamma_0.9592671899355066,0.0,0.0,0.0,True,1.0,-2.251632788108028,-2.2222222222222223,0.9867652453513874,True,D_N_Pop_$\gamma$=0.96
+bias_progression_discounted_natural_proper_gamma_0.9057502776046518,0.0,0.0,0.0,True,1.0,-3.6045915248230767,-2.2222222222222223,0.37793381382961555,False,D_N_Prop_$\gamma$=0.91
+bias_progression_discounting_free_vanilla_sampling_gamma_None,0.0,0.0,0.0,True,1.0,-2.398764116083839,-2.2222222222222223,0.9205561477622726,True,DF_V_$\gamma$=None
+bias_progression_discounting_free_natural_sampling_gamma_None,0.0,0.0,0.0,True,1.0,-2.342329125622176,-2.2222222222222223,0.9459518934700208,True,DF_N_$\gamma$=None

@@ -1,0 +1,5 @@
+environment,policy,gain,bias
+env-a1,"(np.int64(0), np.int64(0))",-1.0,12.0
+env-a1,"(np.int64(0), np.int64(1))",-1.0,12.0
+env-a1,"(np.int64(1), np.int64(0))",-1.0,11.0
+env-a1,"(np.int64(1), np.int64(1))",-1.0,11.0

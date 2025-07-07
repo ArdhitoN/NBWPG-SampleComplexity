@@ -1,0 +1,32 @@
+# Assuming infinite-horizon, finite MDP, state set and action set is fixed and finite.
+# Therefore, the number of stationary deterministic policies is |A|^|S|
+# Means the number of possible actions on each states will be the same
+transitions:
+  s0:
+    a00:
+      - { "next_state": "s0", "reward": 5, "prob": 0.5 }
+      - { "next_state": "s1", "reward": 5, "prob": 0.5 }
+
+    a01: { "next_state": "s1", "reward": 10, "prob": 1.0 }
+  s1:
+    a10: { "next_state": "s1", "reward": -1, "prob": 1.0 }
+    a11: { "next_state": "s1", "reward": -1, "prob": 1.0 }
+
+transitions_converted:
+  # Index at each level consecutively : current state, action, next state
+  0:
+    0:
+      0: { "prob": 0.5, "reward": 5 }
+      1: { "prob": 0.5, "reward": 5 }
+
+    1:
+      1: { "prob": 1.0, "reward": 10 }
+
+  1:
+    0:
+      1: { "prob": 1.0, "reward": -1 }
+    1:
+      1: { "prob": 1.0, "reward": -1 }
+
+initial_state: "s0"
+initial_state_dist: { 0: 1.0 }

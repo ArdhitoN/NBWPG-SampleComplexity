@@ -1,0 +1,6 @@
+epsilon: 0.1
+exploration: epsilon-greedy
+gamma: null
+learning_rate: 0.1
+learning_rate_v: 0.1
+seed: 42

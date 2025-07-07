@@ -1,0 +1,217 @@
+environment,policy,gain,bias
+env-b1,"(np.int64(0), np.int64(0))",0.6666666666666666,0.22222222222222232
+env-b1,"(np.int64(0), np.int64(1))",4.0,-3.0
+env-b1,"(np.int64(1), np.int64(0))",1.3333333333333333,1.1111111111111114
+env-b1,"(np.int64(1), np.int64(1))",4.0,-1.0
+env-a1,"(np.int64(0), np.int64(0))",-1.0,12.0
+env-a1,"(np.int64(0), np.int64(1))",-1.0,12.0
+env-a1,"(np.int64(1), np.int64(0))",-1.0,11.0
+env-a1,"(np.int64(1), np.int64(1))",-1.0,11.0
+env-a3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0))",0.0,-11.111111111111112
+env-a3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1))",0.0,-11.111111111111112
+env-a3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0))",0.0,-20.00000000000001
+env-a3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1))",0.0,-20.00000000000001
+env-a3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0))",0.0,-2.2222222222222223
+env-a3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1))",0.0,-2.2222222222222223
+env-a3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0))",0.0,-2.439024390243903
+env-a3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1))",0.0,-2.439024390243903
+env-a3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0))",0.0,-2.439024390243903
+env-a3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1))",0.0,-2.439024390243903
+env-a3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0))",0.0,-20.00000000000001
+env-a3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1))",0.0,-20.00000000000001
+env-a3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0))",0.0,-2.2222222222222223
+env-a3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1))",0.0,-2.2222222222222223
+env-a3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0))",0.0,-11.111111111111114
+env-a3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1))",0.0,-11.111111111111114
+env-a2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",0.0,2.0
+env-a2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",0.0,2.0
+env-a2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",0.0,2.0
+env-a2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",0.0,2.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",0.0,2.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",0.0,2.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",0.0,5.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",0.0,2.0
+env-a2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",0.0,2.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",0.0,3.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",0.0,3.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",0.0,3.0
+env-a2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",0.0,3.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",0.0,3.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",0.0,3.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",0.0,6.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",0.0,3.0
+env-a2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",0.0,3.0
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.676800000000001,-7.460800000000008
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",0.8729792147806004,10.034727370672412
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.759815242494225,2.516078276592232
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",0.7324675324675323,10.820475628267838
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9792207792207788,1.2674312700286752
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",0.8367952522255193,10.598323486162597
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.1216617210682474,7.911111306782672
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",0.7938461538461538,10.87076923076923
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.3446153846153828,-0.4731360946745493
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.0180505415162453,10.316321078079998
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.3646209386281567,7.033285980528888
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",0.9735849056603771,10.621075115699536
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.4264150943396199,6.7335706657173535
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.0197628458498023,10.495414707306784
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.114624505928852,9.557671577434434
+env-b3,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.0079999999999998,10.58
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.047999999999999,-2.8599999999999994
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",1.396039603960396,10.023184001568474
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.8712871287128692,5.65831781197923
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",1.357894736842105,10.350138504155124
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9894736842105243,5.093905817174522
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",1.4494382022471908,10.080040398939527
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.5842696629213462,8.767895467743983
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",1.4399999999999997,10.168571428571429
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.1599999999999984,4.417142857142865
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.5828220858895705,9.780985358876887
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.7300613496932487,8.341563476231713
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",1.5749999999999997,9.863867187499999
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.7624999999999977,8.208593750000013
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.605095541401274,9.759969978498113
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.6433121019108263,9.379569150878343
+env-b3,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.6032,9.780800000000001
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.676800000000001,-14.460800000000008
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",0.8729792147806004,3.0347273706724116
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.759815242494225,-4.483921723407768
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",0.7324675324675323,3.8204756282678365
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9792207792207788,-5.732568729971325
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",0.8367952522255193,3.598323486162597
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.1216617210682474,0.9111113067826726
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",0.7938461538461538,3.8707692307692305
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.3446153846153828,-7.473136094674548
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.0180505415162453,3.316321078079996
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.3646209386281567,0.03328598052888765
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",0.9735849056603771,3.621075115699537
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.4264150943396199,-0.26642933428264737
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.0197628458498023,3.4954147073067854
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.114624505928852,2.557671577434433
+env-b3,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.0079999999999998,3.58
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.047999999999999,-9.86
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",1.396039603960396,3.023184001568474
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.8712871287128692,-1.34168218802077
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",1.357894736842105,3.350138504155125
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9894736842105243,-1.906094182825477
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",1.4494382022471908,3.080040398939528
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.5842696629213462,1.767895467743985
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",1.4399999999999997,3.16857142857143
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.1599999999999984,-2.5828571428571347
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.5828220858895705,2.7809853588768867
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.7300613496932487,1.3415634762317135
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",1.5749999999999997,2.8638671874999995
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.7624999999999977,1.2085937500000128
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.605095541401274,2.759969978498113
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.6433121019108263,2.379569150878343
+env-b3,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.6032,2.7808
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.676800000000001,-2.460800000000006
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",0.8729792147806004,15.034727370672412
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.759815242494225,7.516078276592234
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",0.7324675324675323,15.820475628267838
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9792207792207788,6.267431270028677
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",0.8367952522255193,15.598323486162597
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.1216617210682474,12.911111306782672
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",0.7938461538461538,15.87076923076923
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.3446153846153828,4.526863905325451
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.0180505415162453,15.316321078079998
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.3646209386281567,12.033285980528888
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",0.9735849056603771,15.621075115699536
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.4264150943396199,11.733570665717354
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.0197628458498023,15.495414707306784
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.114624505928852,14.557671577434435
+env-b3,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.0079999999999998,15.58
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.047999999999999,2.139999999999999
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",1.396039603960396,15.023184001568474
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.8712871287128692,10.658317811979227
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",1.357894736842105,15.350138504155124
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9894736842105243,10.093905817174527
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",1.4494382022471908,15.080040398939527
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.5842696629213462,13.767895467743983
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",1.4399999999999997,15.168571428571429
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.1599999999999984,9.417142857142865
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.5828220858895705,14.780985358876887
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.7300613496932487,13.341563476231713
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",1.5749999999999997,14.863867187500002
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.7624999999999977,13.208593750000013
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.605095541401274,14.759969978498114
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.6433121019108263,14.379569150878343
+env-b3,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.6032,14.780800000000001
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.676800000000001,-9.460800000000008
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",0.8729792147806004,8.034727370672412
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.759815242494225,0.516078276592232
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",0.7324675324675323,8.820475628267836
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9792207792207788,-0.7325687299713248
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",0.8367952522255193,8.598323486162597
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.1216617210682474,5.911111306782674
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",0.7938461538461538,8.87076923076923
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.3446153846153828,-2.4731360946745493
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.0180505415162453,8.316321078079994
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.3646209386281567,5.033285980528886
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",0.9735849056603771,8.621075115699536
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.4264150943396199,4.7335706657173535
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.0197628458498023,8.495414707306784
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.114624505928852,7.557671577434434
+env-b3,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.0079999999999998,8.58
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",3.047999999999999,-4.859999999999999
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",1.396039603960396,8.023184001568474
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",1.8712871287128692,3.65831781197923
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",1.357894736842105,8.350138504155124
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",1.9894736842105243,3.093905817174524
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",1.4494382022471908,8.080040398939527
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",1.5842696629213462,6.767895467743984
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",1.4399999999999997,8.168571428571429
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",2.1599999999999984,2.4171428571428653
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",1.5828220858895705,7.780985358876888
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",1.7300613496932487,6.3415634762317135
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",1.5749999999999997,7.8638671874999995
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",1.7624999999999977,6.208593750000014
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.605095541401274,7.759969978498113
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.6433121019108263,7.379569150878343
+env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.6032,7.780799999999999
+env-b2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",9.2,35.906666666666666
+env-b2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",9.365853658536587,34.51695419393218
+env-b2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",12.5,17.333333333333336
+env-b2,"(np.int64(0), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",13.151515151515152,15.165289256198342
+env-b2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",8.620689655172415,35.128418549346016
+env-b2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",8.806722689075631,33.69571357954946
+env-b2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",12.891304347826088,18.344045368620037
+env-b2,"(np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",13.344537815126051,16.366005225619652
+env-b2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",9.2,35.906666666666666
+env-b2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",9.365853658536587,34.51695419393218
+env-b2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",12.5,17.333333333333336
+env-b2,"(np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",13.151515151515152,15.165289256198342
+env-b2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",8.620689655172415,35.128418549346016
+env-b2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",8.806722689075631,33.69571357954946
+env-b2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",12.891304347826088,18.344045368620037
+env-b2,"(np.int64(0), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",13.344537815126051,16.366005225619652
+env-b2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(0))",9.2,15.106666666666664
+env-b2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(0), np.int64(1))",9.365853658536587,13.882807852468769
+env-b2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(0))",12.5,-0.16666666666667496
+env-b2,"(np.int64(1), np.int64(0), np.int64(0), np.int64(1), np.int64(1))",13.151515151515152,-1.6831955922865056
+env-b2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(0))",8.620689655172415,13.749108204518429
+env-b2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(1))",8.806722689075631,12.502436268625098
+env-b2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(0))",12.891304347826088,1.2353497164461196
+env-b2,"(np.int64(1), np.int64(0), np.int64(1), np.int64(1), np.int64(1))",13.344537815126051,-0.28945695925428794
+env-b2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(0))",9.2,15.106666666666664
+env-b2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(0), np.int64(1))",9.365853658536587,13.882807852468769
+env-b2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(0))",12.5,-0.16666666666667496
+env-b2,"(np.int64(1), np.int64(1), np.int64(0), np.int64(1), np.int64(1))",13.151515151515152,-1.6831955922865056
+env-b2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(0))",8.620689655172415,13.749108204518429
+env-b2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",8.806722689075631,12.502436268625098
+env-b2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",12.891304347826088,1.2353497164461196
+env-b2,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",13.344537815126051,-0.28945695925428794

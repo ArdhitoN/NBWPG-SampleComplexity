@@ -1,0 +1,9 @@
+transitions:
+  s0:
+    red:
+      - { "next_state": "s0", "reward": 5, "prob": 0.5 }
+      - { "next_state": "s1", "reward": 5, "prob": 0.5 }
+    blue: { "next_state": "s1", "reward": 10, "prob": 1.0 }
+  s1:
+    black: { "next_state": "s1", "reward": -1, "prob": 1.0 }
+initial_state: "s0" 
