@@ -16,6 +16,21 @@ PROJECT_ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, '..'))  # code
 ENV_DIR = os.path.join(PROJECT_ROOT, 'environment')           # code/environment
 AGENT_DIR = os.path.join(PROJECT_ROOT, 'agent')           # code/environment
 XHS_DIR = os.path.join(PROJECT_ROOT, 'xh_search_results')           # code/xh_search_results
+EXP_CONFIG_PATH = os.path.join(SCRIPT_DIR, 'experiment.yml')  # code/experiment/experiment.yml
+
+
+def get_env_config_from_experiment(exp_config_path=EXP_CONFIG_PATH):
+    """
+    Read the active `env_config` from experiment.yml and return
+    (env_config_filename, env_name), e.g. ("env-a1.yml", "env-a1").
+    """
+    with open(exp_config_path) as f:
+        cfg = yaml.safe_load(f)
+    env_config_filename = cfg.get('env_config')
+    if not env_config_filename:
+        raise ValueError(f"No 'env_config' key found in {exp_config_path}")
+    env_name = os.path.splitext(os.path.basename(env_config_filename))[0]
+    return env_config_filename, env_name
 
 
 
@@ -38,39 +53,54 @@ def policy_to_pi(env, policy_actions):
     return pi
 
 
-def run_exhaustive_search(prefix='phase1'):
-    
+def run_exhaustive_search(env_config_filename=None, prefix=None):
+    """
+    Run an exhaustive search over deterministic policies.
+
+    If `env_config_filename` is given (e.g. "env-a1.yml") only that single
+    environment is processed; otherwise the active env from experiment.yml
+    is used. `prefix` defaults to the environment name (e.g. "env-a1"), so the
+    output CSV is `{env_name}_exhaustive_search_results.csv`, matching what
+    compute_method_effectiveness.py expects.
+    """
+    # Resolve which environment to process and the output prefix
+    if env_config_filename is None:
+        env_config_filename, env_name = get_env_config_from_experiment()
+    else:
+        env_name = os.path.splitext(os.path.basename(env_config_filename))[0]
+    if prefix is None:
+        prefix = env_name
+
+    yaml_path = os.path.join(ENV_DIR, env_config_filename)
+
     results = []
 
-    # Find all environment YAML files
-    yml_paths = glob.glob(os.path.join(ENV_DIR, '*.yml'))
-    for yaml_path in yml_paths:
-        with open(yaml_path) as yf:
-            raw_cfg = yaml.safe_load(yf)
-        if 'transitions_converted' not in raw_cfg:
-            print(f"Skipping {os.path.basename(yaml_path)}: no 'transitions_converted' section")
-            continue
-        env = Env(config_path=yaml_path)
-        agent = Agent(
-            config_path=os.path.join(AGENT_DIR, 'agent.yml'),
-            gamma=None,
-            env=env
-        )
+    with open(yaml_path) as yf:
+        raw_cfg = yaml.safe_load(yf)
+    if 'transitions_converted' not in raw_cfg:
+        raise ValueError(f"{os.path.basename(yaml_path)} has no 'transitions_converted' section")
 
-        for policy in enumerate_deterministic_policies(env):
-            # Set deterministic policy
-            agent.pi = policy_to_pi(env, policy)
-            # Compute gain and bias at initial state
-            gain = agent.compute_gain()
-            bias_vec = agent.compute_bias()
-            bias_initial = bias_vec[env.initial_state]
+    env = Env(config_path=yaml_path)
+    agent = Agent(
+        config_path=os.path.join(AGENT_DIR, 'agent.yml'),
+        gamma=None,
+        env=env
+    )
 
-            results.append({
-                'environment': os.path.splitext(os.path.basename(yaml_path))[0],
-                'policy': policy,
-                'gain': gain,
-                'bias': bias_initial
-            })
+    for policy in enumerate_deterministic_policies(env):
+        # Set deterministic policy
+        agent.pi = policy_to_pi(env, policy)
+        # Compute gain and bias at initial state
+        gain = agent.compute_gain()
+        bias_vec = agent.compute_bias()
+        bias_initial = bias_vec[env.initial_state]
+
+        results.append({
+            'environment': env_name,
+            'policy': policy,
+            'gain': gain,
+            'bias': bias_initial
+        })
 
     df = pd.DataFrame(results)
 
@@ -95,4 +125,5 @@ def run_exhaustive_search(prefix='phase1'):
 
 
 if __name__ == '__main__':
-    run_exhaustive_search(prefix='test')
+    # Uses the env_config from experiment.yml; output prefix = that env's name.
+    run_exhaustive_search()

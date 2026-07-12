@@ -127,4 +127,3 @@ env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int
 env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0), np.int64(1))",1.605095541401274,7.759969978498113
 env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(0))",1.6433121019108263,7.379569150878343
 env-b3,"(np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1))",1.6032,7.780799999999999
-
