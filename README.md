@@ -32,8 +32,9 @@ An experiment code for a research on: Sample Complexity of Policy Gradient Reinf
 
    * To plot sample complexity visualizations:
    
-      `python -m experiment.plot_sample_complexity -c figs/experiment_outputs_final/<ENV>/<ENV>_convergence_data.csv -o <OUTPUT_DIR>` 
+      `python -m experiment.plot_sample_complexity -c figs/experiment_outputs_final/<ENV>/<ENV>_convergence_data.csv --breakdown-csv figs/experiment_outputs_final/<ENV>/<ENV>_convergence_breakdown.csv -o <OUTPUT_DIR>` 
 
+      Example: `python -m experiment.plot_sample_complexity -c figs/experiment_outputs_final_replication/env-a1/env-a1_convergence_data.csv --breakdown-csv figs/experiment_outputs_final_replication/env-a1/env-a1_convergence_breakdown.csv -o ./figs/experiment_outputs_final_replication/env-a1/`
 
    * Miscellany:
       * To plot bias progressions: 

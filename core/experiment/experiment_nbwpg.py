@@ -1,10 +1,12 @@
 import os
+import re
 import yaml
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 import logging
-from tqdm import tqdm 
+from tqdm import tqdm
 import optuna
 from visualizer import Visualizer
 
@@ -547,7 +549,218 @@ def create_convergence_boxplot(env_name_prefix, convergence_data, output_dir):
     finally:
         plt.close()
 
-def run_discounting_free_polgrad(config, common_data, final_evaluation_results_data, convergence_data):
+def format_method_label(method):
+    """Short labels matching the avg/std barplot, e.g. discounted_vanilla_popular -> D_V_Pop."""
+    clean = re.sub(r"discounting_free_", "DF_", method)
+    clean = re.sub(r"discounted_", "D_", clean)
+    clean = clean.replace('vanilla', 'V').replace('natural', 'N').replace('proper', 'Prop').replace('popular', 'Pop')
+    clean = clean.replace('_sampling', '')
+    return clean
+
+
+def create_stacked_tuning_barplot(env_name_prefix, convergence_breakdown, output_dir):
+    """
+    Saves a per-(method, seed) breakdown CSV and a stacked bar plot of mean
+    samples-to-converge, split into gamma-tuning vs learning (outside tuning).
+
+    Discounted methods show two stacked segments (tuning at the bottom, learning
+    on top); discounting-free methods have no tuning, so a single learning bar.
+    The total bar height equals the mean total in the avg/std barplot, and the
+    y-axis is log-scaled to stay consistent with that figure.
+
+    convergence_breakdown: { method_name: [ {'seed', 'tuning_samples', 'learning_samples'}, ... ] }
+    """
+    # --- Save the breakdown CSV (one row per method/seed) ---
+    rows = []
+    for method, recs in convergence_breakdown.items():
+        for r in recs:
+            rows.append({
+                'method_name': method,
+                'seed': r['seed'],
+                'tuning_samples': r['tuning_samples'],
+                'learning_samples': r['learning_samples'],
+                'total_samples': r['tuning_samples'] + r['learning_samples'],
+            })
+    if not rows:
+        logger.warning("No convergence breakdown data; skipping stacked tuning barplot.")
+        return
+
+    os.makedirs(output_dir, exist_ok=True)
+    csv_path = os.path.join(output_dir, f"{env_name_prefix}_convergence_breakdown.csv")
+    try:
+        pd.DataFrame(rows).to_csv(csv_path, index=False)
+        logger.info(f"Convergence breakdown CSV saved to {csv_path}")
+    except Exception as e:
+        logger.error(f"Error saving breakdown CSV {csv_path}: {e}")
+
+    # --- Aggregate (exclude *_exact methods) and sort like the avg/std barplot ---
+    items = [(m, recs) for m, recs in convergence_breakdown.items()
+             if not m.endswith('_exact') and recs]
+    if not items:
+        logger.warning("No non-exact methods with breakdown data; skipping stacked barplot.")
+        return
+
+    method_order = {'V': 0, 'N': 1, 'Pop': 2, 'Prop': 3}
+    def sort_key(method):
+        prefix = 0 if method.startswith("discounted_") else 1
+        mt = next((k for k in method_order if k in format_method_label(method)), 'N')
+        return (prefix, method_order[mt], method)
+    items.sort(key=lambda kv: sort_key(kv[0]))
+
+    methods = [m for m, _ in items]
+    labels = [format_method_label(m) for m in methods]
+    tuning_means = [float(np.mean([r['tuning_samples'] for r in recs])) for _, recs in items]
+    learning_means = [float(np.mean([r['learning_samples'] for r in recs])) for _, recs in items]
+
+    colors = []
+    for m in methods:
+        if m.startswith("discounting_free_"):
+            colors.append("#1f77b4")
+        elif m.startswith("discounted_"):
+            colors.append("#ff7f0e")
+        else:
+            colors.append("#7f7f7f")
+
+    TITLE_SIZE = 12 * 1.4
+    LABEL_SIZE = 10 * 1.4
+    TICK_SIZE = 10 * 1.4
+
+    extended_labels = [
+        f"{lbl}\nTune: {int(t)}\nLearn: {int(l)}"
+        for lbl, t, l in zip(labels, tuning_means, learning_means)
+    ]
+
+    plt.figure(figsize=(12, 8))
+    ax = plt.gca()
+    x = np.arange(len(methods))
+
+    # Tuning segment (bottom, hatched). Zero for discounting-free methods.
+    ax.bar(x, tuning_means, color=colors, edgecolor='black', alpha=0.45, hatch='///')
+    # Learning segment (stacked on top, solid).
+    ax.bar(x, learning_means, bottom=tuning_means, color=colors, edgecolor='black', alpha=0.95)
+
+    ax.set_yscale('log')
+    ax.set_title(f"Convergence Samples: Tuning vs Learning (log-scale) on {env_name_prefix}", fontsize=TITLE_SIZE)
+    ax.set_xlabel("Method", fontsize=LABEL_SIZE)
+    ax.set_ylabel("Samples to Converge (log scale)", fontsize=LABEL_SIZE)
+    ax.set_xticks(x)
+    ax.set_xticklabels(extended_labels, rotation=0, ha="center", fontsize=TICK_SIZE)
+    for lbl, color in zip(ax.get_xticklabels(), colors):
+        lbl.set_color(color)
+    plt.tick_params(axis='y', labelsize=TICK_SIZE)
+
+    legend_elems = [
+        Patch(facecolor='gray', alpha=0.45, hatch='///', edgecolor='black', label='Gamma tuning'),
+        Patch(facecolor='gray', alpha=0.95, edgecolor='black', label='Learning (outside tuning)'),
+    ]
+    ax.legend(handles=legend_elems, fontsize=TICK_SIZE, loc='upper right')
+    ax.grid(True, which="both", linestyle="--", alpha=0.5)
+    plt.tight_layout()
+
+    out_png = os.path.join(output_dir, f"{env_name_prefix}_convergence_tuning_stacked_barplot.png")
+    try:
+        plt.savefig(out_png)
+        logger.info(f"Stacked tuning barplot saved to {out_png}")
+    except Exception as e:
+        logger.error(f"Error saving stacked tuning barplot {out_png}: {e}")
+    finally:
+        plt.close()
+
+    # Also emit the log10-value version (linear axis, ticks 0..6) with mean/std.
+    create_stacked_tuning_barplot_log10(env_name_prefix, convergence_breakdown, output_dir)
+
+
+def create_stacked_tuning_barplot_log10(env_name_prefix, convergence_breakdown, output_dir):
+    """
+    Stacked tuning-vs-learning barplot drawn with log10 VALUES on a linear y-axis
+    (ticks 0,1,...,6; bars start at 0), with total mean/std annotations and an
+    asymmetric (log10-projected) error bar on each bar top.
+
+    convergence_breakdown: { method_name: [ {'seed', 'tuning_samples', 'learning_samples'}, ... ] }
+    """
+    items = [(m, recs) for m, recs in convergence_breakdown.items()
+             if not m.endswith('_exact') and recs]
+    if not items:
+        logger.warning("No non-exact methods with breakdown data; skipping log10 stacked barplot.")
+        return
+
+    method_order = {'V': 0, 'N': 1, 'Pop': 2, 'Prop': 3}
+    def sort_key(method):
+        prefix = 0 if method.startswith("discounted_") else 1
+        mt = next((k for k in method_order if k in format_method_label(method)), 'N')
+        return (prefix, method_order[mt], method)
+    items.sort(key=lambda kv: sort_key(kv[0]))
+
+    methods = [m for m, _ in items]
+    labels = [format_method_label(m) for m in methods]
+    tuning_means = [float(np.mean([r['tuning_samples'] for r in recs])) for _, recs in items]
+    learning_means = [float(np.mean([r['learning_samples'] for r in recs])) for _, recs in items]
+    totals_per_method = [[r['tuning_samples'] + r['learning_samples'] for r in recs] for _, recs in items]
+    total_means = [float(np.mean(ts)) for ts in totals_per_method]
+    total_stds = [float(np.std(ts)) for ts in totals_per_method]
+
+    log_tuning = [np.log10(t) if t > 0 else 0.0 for t in tuning_means]
+    log_total = [np.log10(tot) if tot > 0 else 0.0 for tot in total_means]
+    learning_heights = [max(lt - ltun, 0.0) for lt, ltun in zip(log_total, log_tuning)]
+    upper_errs = [np.log10(tot + s) - np.log10(tot) if tot > 0 else 0.0
+                  for tot, s in zip(total_means, total_stds)]
+    lower_errs = [np.log10(tot) - np.log10(max(tot - s, 1)) if tot > 0 else 0.0
+                  for tot, s in zip(total_means, total_stds)]
+
+    colors = []
+    for m in methods:
+        if m.startswith("discounting_free_"):
+            colors.append("#1f77b4")
+        elif m.startswith("discounted_"):
+            colors.append("#ff7f0e")
+        else:
+            colors.append("#7f7f7f")
+
+    TITLE_SIZE = 12 * 1.4
+    LABEL_SIZE = 10 * 1.4
+    TICK_SIZE = 10 * 1.4
+
+    extended_labels = [
+        f"{lbl}\nMean: {int(tot)}\nStd: {int(s)}\nTune: {int(t)}\nLearn: {int(l)}"
+        for lbl, tot, s, t, l in zip(labels, total_means, total_stds, tuning_means, learning_means)
+    ]
+
+    plt.figure(figsize=(12, 8))
+    ax = plt.gca()
+    x = np.arange(len(methods))
+
+    ax.bar(x, log_tuning, color=colors, edgecolor='black', alpha=0.45, hatch='///')
+    ax.bar(x, learning_heights, bottom=log_tuning, color=colors, edgecolor='black', alpha=0.95,
+           yerr=[lower_errs, upper_errs], capsize=5, error_kw={'ecolor': 'black'})
+
+    ax.set_title(f"Convergence Samples: Tuning vs Learning (log₁₀ values) on {env_name_prefix}", fontsize=TITLE_SIZE)
+    ax.set_xlabel("Method", fontsize=LABEL_SIZE)
+    ax.set_ylabel("log₁₀(Samples to Converge)", fontsize=LABEL_SIZE)
+    ax.set_xticks(x)
+    ax.set_xticklabels(extended_labels, rotation=0, ha="center", fontsize=TICK_SIZE)
+    for lbl, color in zip(ax.get_xticklabels(), colors):
+        lbl.set_color(color)
+    plt.tick_params(axis='y', labelsize=TICK_SIZE)
+
+    legend_elems = [
+        Patch(facecolor='gray', alpha=0.45, hatch='///', edgecolor='black', label='Gamma tuning'),
+        Patch(facecolor='gray', alpha=0.95, edgecolor='black', label='Learning (outside tuning)'),
+    ]
+    ax.legend(handles=legend_elems, fontsize=TICK_SIZE, loc='upper right')
+    ax.grid(True, linestyle="--", alpha=0.5)
+    plt.tight_layout()
+
+    out_png = os.path.join(output_dir, f"{env_name_prefix}_convergence_tuning_stacked_barplot_log10.png")
+    try:
+        plt.savefig(out_png)
+        logger.info(f"Log10 stacked tuning barplot saved to {out_png}")
+    except Exception as e:
+        logger.error(f"Error saving log10 stacked tuning barplot {out_png}: {e}")
+    finally:
+        plt.close()
+
+
+def run_discounting_free_polgrad(config, common_data, final_evaluation_results_data, convergence_data, convergence_breakdown):
     logger.info(f"--- Running Discounting Free Experiments for Env: {common_data['env_name_prefix']} ---")
     
     discounting_free_cfg = config.get("discounting_free_params", {})
@@ -562,7 +775,8 @@ def run_discounting_free_polgrad(config, common_data, final_evaluation_results_d
     for method_variant, use_sampling in tqdm(method_configs, desc="Discounting Free Methods"):
         full_method_name = f"discounting_free_{method_variant}{'_sampling' if use_sampling else '_exact'}"
         convergence_data[full_method_name] = []
-        
+        convergence_breakdown[full_method_name] = []
+
         logger.info(f"Running: {full_method_name}")
         for seed_val in tqdm(common_data['EVALUATION_SEEDS'], desc=f"Seeds for {method_variant}_{'sampling' if use_sampling else 'exact'}", leave=False):
             eval_history, full_method_name, trained_agent , gain_samples, total_samples = run_single_config_discounting_free(
@@ -585,8 +799,14 @@ def run_discounting_free_polgrad(config, common_data, final_evaluation_results_d
                 
             if total_samples is not None:
                 convergence_data[full_method_name].append(total_samples)
-            
-                
+                # Discounting-free uses no gamma tuning, so the full cost is "learning".
+                convergence_breakdown[full_method_name].append({
+                    'seed': seed_val,
+                    'tuning_samples': 0,
+                    'learning_samples': total_samples,
+                })
+
+
             if seed_val == common_data['EVALUATION_SEEDS'][0]: # Visualize for first seed
                 viz = Visualizer(common_data['env_name_prefix'], trained_agent, None, seed_val, output_dir=VISUALIZATIONS_DIR)
                 theta_cfg = config.get("theta_range_params", {"min":-10,"max":10,"points":41})
@@ -602,7 +822,7 @@ def run_discounting_free_polgrad(config, common_data, final_evaluation_results_d
                     viz.visualize_gain_progression(full_method_name)
                     viz.visualize_gain_plus_bias_progression(full_method_name)
 
-def run_discounted_polgrad(config, common_data, final_evaluation_results_data, convergence_data):
+def run_discounted_polgrad(config, common_data, final_evaluation_results_data, convergence_data, convergence_breakdown):
     logger.info(f"--- Running Discounted Reward Experiments for Env: {common_data['env_name_prefix']} ---")
     
     disc_cfg = config.get("discounted_polgrad_params", {})
@@ -664,7 +884,8 @@ def run_discounted_polgrad(config, common_data, final_evaluation_results_data, c
             
         full_method_name = f"discounted_{method_variant}{'_' + sampling_type if use_sampling else '_exact'}"
         convergence_data[full_method_name] = []
-        
+        convergence_breakdown[full_method_name] = []
+
         tuning_samples = method_to_tuning_samples_map.get(method_config_tuple, 0)
         for i, seed_val in enumerate(common_data['EVALUATION_SEEDS']):
             eval_history, full_method_name, trained_agent, samples_to_converge, _ = run_single_config_discounted(
@@ -677,10 +898,16 @@ def run_discounted_polgrad(config, common_data, final_evaluation_results_data, c
             
             if samples_to_converge is not None:
                 total_samples_with_tuning = samples_to_converge + tuning_samples
-                
+
                 if full_method_name not in convergence_data:
                     convergence_data[full_method_name] = []
                 convergence_data[full_method_name].append(total_samples_with_tuning)
+                # Record the tuning vs learning split for the stacked barplot.
+                convergence_breakdown[full_method_name].append({
+                    'seed': seed_val,
+                    'tuning_samples': tuning_samples,
+                    'learning_samples': samples_to_converge,
+                })
 
             for iter_num, avg_reward in eval_history:
                 final_evaluation_results_data.append({
@@ -705,23 +932,17 @@ def run_discounted_polgrad(config, common_data, final_evaluation_results_data, c
                     viz.visualize_discounted_value_progression(full_method_name)
                     
 
-def run_experiment():
-    try:
-        with open(DEFAULT_EXP_CONFIG_PATH, 'r') as file:
-            config = yaml.safe_load(file)
-    except FileNotFoundError:
-        logger.error(f"Experiment config file not found: {DEFAULT_EXP_CONFIG_PATH}")
-    except yaml.YAMLError as e:
-        logger.error(f"Error parsing experiment config file {DEFAULT_EXP_CONFIG_PATH}: {e}")
-        return
-    
-    agent_config_path_main = os.path.join(BASE_DIR, config.get("agent_config_path", "../agent/agent.yml"))
+def run_experiment_for_env(config, agent_config_path_main, env_config_file_name):
+    """Run the full NBWPG experiment pipeline for a single environment config.
 
-    env_config_file_name = config.get("env_config", "../environment/env-a1.yml")
+    All output paths and result accumulators are scoped to this environment, so
+    this function is safe to call repeatedly within one process for different envs.
+    """
     env_config_path = os.path.join(BASE_DIR, "..", "environment", env_config_file_name)
     env_name_prefix = get_env_name_prefix(env_config_file_name)
-    
-    setup_paths(config, env_name_prefix=env_name_prefix) 
+
+    setup_paths(config, env_name_prefix=env_name_prefix)
+    logger.info(f"==================== START env: {env_name_prefix} ====================")
 
     common_data = {
         'env_name_prefix': env_name_prefix,
@@ -731,14 +952,15 @@ def run_experiment():
         'EVALUATION_SEEDS': config.get('seeds', [42]) 
     }
 
-    final_evaluation_results_data = [] 
-    convergence_data = {}  
-    
+    final_evaluation_results_data = []
+    convergence_data = {}
+    convergence_breakdown = {}  # { method_name: [ {seed, tuning_samples, learning_samples}, ... ] }
+
     if config.get("run_discounting_free_polgrad", False):
-        run_discounting_free_polgrad(config, common_data, final_evaluation_results_data, convergence_data)
-    
+        run_discounting_free_polgrad(config, common_data, final_evaluation_results_data, convergence_data, convergence_breakdown)
+
     if config.get("run_discounted_polgrad", True):
-        run_discounted_polgrad(config, common_data, final_evaluation_results_data, convergence_data)
+        run_discounted_polgrad(config, common_data, final_evaluation_results_data, convergence_data, convergence_breakdown)
 
     logger.info("--- Consolidating and Plotting All Final Results ---")
     if final_evaluation_results_data:
@@ -759,8 +981,46 @@ def run_experiment():
         
         create_convergence_boxplot(common_data['env_name_prefix'], convergence_data, OUTPUT_DIR_BASE)
 
+        create_stacked_tuning_barplot(common_data['env_name_prefix'], convergence_breakdown, OUTPUT_DIR_BASE)
+
     else:
         logger.info(f"No final evaluation results from any experiment type for {common_data['env_name_prefix']} to plot/save.")
+
+    logger.info(f"==================== DONE env: {env_name_prefix} ====================")
+
+
+def run_experiment():
+    try:
+        with open(DEFAULT_EXP_CONFIG_PATH, 'r') as file:
+            config = yaml.safe_load(file)
+    except FileNotFoundError:
+        logger.error(f"Experiment config file not found: {DEFAULT_EXP_CONFIG_PATH}")
+        return
+    except yaml.YAMLError as e:
+        logger.error(f"Error parsing experiment config file {DEFAULT_EXP_CONFIG_PATH}: {e}")
+        return
+
+    agent_config_path_main = os.path.join(BASE_DIR, config.get("agent_config_path", "../agent/agent.yml"))
+
+    # Multi-env support: `env_configs` (a list) takes precedence; otherwise fall
+    # back to the single `env_config` key for backward compatibility.
+    env_config_file_names = config.get("env_configs") or config.get("env_config", "env-a1.yml")
+    if isinstance(env_config_file_names, str):
+        env_config_file_names = [env_config_file_names]
+
+    n_envs = len(env_config_file_names)
+    logger.info(f"Running experiment across {n_envs} environment(s): {env_config_file_names}")
+
+    for idx, env_config_file_name in enumerate(env_config_file_names, start=1):
+        logger.info(f"---------- [{idx}/{n_envs}] env_config: {env_config_file_name} ----------")
+        try:
+            run_experiment_for_env(config, agent_config_path_main, env_config_file_name)
+        except Exception as e:
+            # Don't let one env's failure abort the whole sweep.
+            logger.exception(f"Experiment FAILED for env '{env_config_file_name}': {e}. Continuing with next env.")
+
+    logger.info(f"All {n_envs} environment(s) processed.")
+
 
 if __name__ == "__main__":
     run_experiment()

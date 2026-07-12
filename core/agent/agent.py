@@ -51,8 +51,8 @@ class Agent:
         self.is_gain_converged = False
         self.delta = 1
         # self.beta = 1e-3
-        self.beta = 1e-1
-        # self.beta = 100
+        self.beta = 1e-1 # for env variant As, use this
+        # self.beta = 100 # for env variant Bs, use this
         self.beta_tilda = 0
         self.beta_div = 10
         self.optimize_gain = True
